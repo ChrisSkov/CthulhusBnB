@@ -52,7 +52,7 @@ public class fetchFacade {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json;charset=UTF-8");
-       // String key = "";
+        // String key = "";
         //con.setRequestProperty("Authorization", "Bearer" + key);
         try (Scanner scan = new Scanner(con.getInputStream()))
         {
