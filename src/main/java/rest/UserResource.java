@@ -17,9 +17,9 @@ public class UserResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://167.71.52.90:3306/ca3",
-                "Tattie",
-                "numsen",
+                "jdbc:mysql://127.0.0.1:3307/hotels",
+                "dev",
+                "ax2",
                 EMF_Creator.Strategy.CREATE);
     private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
