@@ -53,7 +53,7 @@ public class fetchFacade {
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json;charset=UTF-8");
        // String key = "";
-        //con.setRequestProperty("Authorization", key);
+        //con.setRequestProperty("Authorization", "Bearer" + key);
         try (Scanner scan = new Scanner(con.getInputStream()))
         {
             String jsonStr = "";
