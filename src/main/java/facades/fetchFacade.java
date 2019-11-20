@@ -26,8 +26,8 @@ import javafx.util.Pair;
 public class fetchFacade {
 
     private ExecutorService executor = Executors.newCachedThreadPool();
-    private String url = "";
-    private String[] ENDPOINTS = {"hotels/", "rooms/"};
+    private String url = "https://cthulhusbnb.herokuapp.com/";
+    private String[] ENDPOINTS = {"Hotels/", "Rooms/"};
 
     public Map<String, String> allHotelApiData() throws InterruptedException, ExecutionException, TimeoutException {
         Map<String, String> result = new HashMap();

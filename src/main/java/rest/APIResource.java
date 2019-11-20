@@ -41,7 +41,13 @@ public class APIResource {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
-    //Just to verify if the database is setup
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("bnb")
+    public Map getDataFromAllHotelEndpoints() throws Exception {
+        return api.allHotelApiData();
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
@@ -72,15 +78,5 @@ public class APIResource {
     public String getFromAdmin() {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
-    }
-    
-    
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("AllSpells/{index}")
-//    @RolesAllowed("user")
-//    public String getAllSpells(@PathParam("index") int index) throws ProtocolException, IOException {
-//        return api.getDnDData(index);
-//    }
-    
+    }   
 }
