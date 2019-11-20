@@ -1,0 +1,14 @@
+{
+  "Hotels": [
+    {
+      "id": 1,
+      "Name": "Hotel Nigeria",
+      "Rating": 90001,
+      "Owner": "Uvuvwevwevwe Onyetenyevwe Ugwemubwem Ossas"
+    }
+  ],
+  "Rooms": [
+    { "id": 1, "Number": "666", "Booking status": "Availible. Like your mom" }
+  ],
+  "Country": { "id": 1, "Name": "Nigeria" }
+}
