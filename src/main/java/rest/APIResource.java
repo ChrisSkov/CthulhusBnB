@@ -75,12 +75,12 @@ public class APIResource {
     }
     
     
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("AllSpells/{index}")
-    //@RolesAllowed("user")
-    public String getAllSpells(@PathParam("index") int index) throws ProtocolException, IOException {
-        return api.getDnDData(index);
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("AllSpells/{index}")
+//    @RolesAllowed("user")
+//    public String getAllSpells(@PathParam("index") int index) throws ProtocolException, IOException {
+//        return api.getDnDData(index);
+//    }
     
 }
