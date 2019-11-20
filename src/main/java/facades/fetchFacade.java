@@ -54,7 +54,7 @@ public class fetchFacade {
         executor.shutdown();
         return result;
     }
-
+//
     private String getApiData(String url) {
         String result = "";
         try {
