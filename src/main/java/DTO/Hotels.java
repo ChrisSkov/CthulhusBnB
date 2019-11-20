@@ -9,14 +9,14 @@ package DTO;
  *
  * @author artin
  */
-public class Spell {
+public class Hotels {
 
     private String id;
     private String index;
     private String name;
     private String description;
 
-    public Spell(String id, String index, String name, String description)
+    public Hotels(String id, String index, String name, String description)
     {
         this.id = id;
         this.index = index;
