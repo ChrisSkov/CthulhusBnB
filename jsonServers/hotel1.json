@@ -1,0 +1,9 @@
+{
+    "Hotel": [
+      { "Name": "Hilton", "id": 1, "stars": "4", "address": "laksvej 100" }
+    ],
+    "Country": [
+      { "id": 1, "name": "some Denmark" }
+    ],
+    "Room": {"id": 1, "name": "4" }
+  }
