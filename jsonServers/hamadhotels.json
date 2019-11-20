@@ -1,0 +1,42 @@
+{
+  "hotel": [
+    {
+      "id": 1,
+      "name": "Hilton-hotel",
+      "stars": "5.0",
+      "address": "New York",
+      "Country": "USA"
+    },
+    {
+      "id": 2,
+      "name": "Hamad luxury hotel",
+      "stars": "5.2",
+      "address": "København C",
+      "Country": "Denmark"
+    },
+    {
+      "id": 3,
+      "name": "Chris's SleepHotel",
+      "stars": "1.0",
+      "address": "Værløse",
+      "Country": "Denmark"
+    },
+    {
+      "id": 4,
+      "name": "Artin-hotel",
+      "stars": "3.0",
+      "address": "Sorgenfri",
+      "Country": "Denmark"
+    }
+  ],
+  "Rooms": [
+    {
+      "id": 1,
+      "Room": "Singlebed"
+    },
+    {
+      "id": 2,
+      "Room": "Kingsize"
+    }
+  ]
+}
