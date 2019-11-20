@@ -5,6 +5,7 @@ import entities.User;
 import facades.fetchFacade;
 import java.io.IOException;
 import java.net.ProtocolException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.security.RolesAllowed;
@@ -40,13 +41,20 @@ public class APIResource {
     public String getInfoForAll() {
         return "{\"msg\":\"Hello anonymous\"}";
     }
-
+    
     @GET
+    @Path("HotelList")
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("bnb")
-    public Map getDataFromAllHotelEndpoints() throws Exception {
-        return api.allHotelApiData();
+    public String getJsonPeopleList() {
+        fetchFacade af = new fetchFacade();
+        String url = "https://cthulhusbnb.herokuapp.com/";
+        List<String> l = new ArrayList();
+        l.add("Hotels/");
+        l.add("Rooms/");
+        return af.fetch(url, l).toString();
     }
+
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -2,7 +2,9 @@ package facades;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,55 +27,76 @@ import javafx.util.Pair;
  */
 public class fetchFacade {
 
-    private ExecutorService executor = Executors.newCachedThreadPool();
-    private String url = "https://cthulhusbnb.herokuapp.com/";
-    private String[] ENDPOINTS = {"Hotels/", "Rooms/"};
-
-    public Map<String, String> allHotelApiData() throws InterruptedException, ExecutionException, TimeoutException {
-        Map<String, String> result = new HashMap();
-        Queue<Future<Pair<String, String>>> queue = new ArrayBlockingQueue(ENDPOINTS.length);
-
-        for (String endpoint : ENDPOINTS) {
-            Future<Pair<String, String>> future = executor.submit(new Callable<Pair<String, String>>() {
-                @Override
-                public Pair<String, String> call() throws Exception {
-                    return new Pair(endpoint.substring(0, endpoint.length() - 1), getApiData(url + endpoint));
-                }
-            });
-            queue.add(future);
-        }
-
-        while (!queue.isEmpty()) {
-            Future<Pair<String, String>> epPair = queue.poll();
-            if (epPair.isDone()) {
-                result.put(epPair.get().getKey(), epPair.get().getValue());
-            } else {
-                queue.add(epPair);
-            }
-        }
-        executor.shutdown();
-        return result;
-    }
-//
-    private String getApiData(String url) {
-        String result = "";
+        public String fetch(String urlStr) {
         try {
-            URL siteURL = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) siteURL.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json;charset=UTF-8");
-            connection.setRequestProperty("user-agent", "Application");
-            try (Scanner scan = new Scanner(connection.getInputStream())) {
-                String response = "";
+            URL url = new URL(urlStr);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Accept", "application/json;charset=UTF-8");
+            String jsonStr = "";
+            try ( Scanner scan = new Scanner(con.getInputStream())) {
                 while (scan.hasNext()) {
-                    response += scan.nextLine();
+                    jsonStr += scan.nextLine();
                 }
-                Gson gson = new Gson();
-                result = gson.fromJson(response, JsonObject.class).toString();
             }
-        } catch (Exception e) {
-            result = "";
+            return jsonStr;
+        } catch (IOException e) {
+            return null;
         }
-        return result;
+    }
+
+    //This fetch method returns a string + specific with json format
+    public String fetchWithSpec(String urlStr, String specific) {
+        try {
+            URL url = new URL(urlStr + specific);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Accept", "application/json;charset=UTF-8");
+            String jsonStr = "";
+            try ( Scanner scan = new Scanner(con.getInputStream())) {
+                while (scan.hasNext()) {
+                    jsonStr += scan.nextLine();
+                }
+            }
+            return jsonStr;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    //This fetch method returns a list of strings with json format
+    public List<String> fetch(String urlStr, List<String> specificList) {
+        final ExecutorService executor = Executors.newCachedThreadPool();
+        try {
+            Queue<Future<String>> queue = new ArrayBlockingQueue(specificList.size());
+            List<String> res = new ArrayList();
+            for (String specifc : specificList) {
+                Future<String> future = executor.submit(() -> {
+                    return fetch(urlStr + specifc);
+                });
+                queue.add(future);
+            }
+            while (!queue.isEmpty()) {
+                Future<String> specific = queue.poll();
+                if (specific.isDone()) {
+                    res.add(specific.get());
+                } else {
+                    queue.add(specific);
+                }
+            }
+            return res;
+        } catch (InterruptedException | ExecutionException e) {
+            return null;
+        } finally {
+            executor.shutdown();
+        }
+    }
+    
+    public static void main(String[] args) throws ProtocolException, IOException, InterruptedException, ExecutionException, TimeoutException
+    {
+        fetchFacade facade = new fetchFacade();
+        
+        String result = facade.fetch("https://cthulhusbnb.herokuapp.com/Rooms");
+        System.out.println(result);
     }
 }
