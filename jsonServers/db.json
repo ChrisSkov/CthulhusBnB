@@ -1,0 +1,32 @@
+{
+  "Hotels": [
+    {
+      "id": 1,
+      "Name": "Hotel Nigeria",
+      "Rating": 90001,
+      "Owner": "Uvuvwevwevwe Onyetenyevwe Ugwemubwem Ossas"
+    }
+  ],
+  "Rooms": [
+    { "id": 1, "Number": "666", "Booking status": "Availible. Like your mom" }
+  ],
+  "Country": { "id": 1, "Name": "Nigeria" },
+
+    "Hamad Hotels": [{
+
+    }],
+    "Hotels2": [
+      {
+        "id": 1,
+        "Name": "Hotel Hamad",
+        "Rating": "The Best Hotel",
+        "Owner": "Shahanshah Hamad"
+      }
+    ],
+    "Rooms2": [
+      { "id": 1, "Number": "yes", "Booking status": "Availible. only if approved by" }
+    ],
+    "Country2": { "id": 1, "Name": "The World" }
+  
+
+}
