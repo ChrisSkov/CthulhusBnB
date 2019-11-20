@@ -99,7 +99,7 @@ public class fetchFacade {
     {
         //Changes
         fetchFacade facade = new fetchFacade();
-        
+        //
         String result = facade.fetch("https://cthulhusbnb.herokuapp.com/Rooms");
         System.out.println(result);
     }
