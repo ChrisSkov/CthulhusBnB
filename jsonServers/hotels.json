@@ -1,0 +1,43 @@
+{
+  "hotel": [
+    {
+      "id": 1,
+      "country": "USA",
+      "name": "Radison Blue",
+      "stars": "5.0",
+      "address": "København C"
+    },
+    {
+      "id": 2,
+      "country": "Denmark",
+      "name": "Jabs Lux Hotel",
+      "stars": "10+",
+      "address": "København C"
+    },
+    {
+      "id": 3,
+      "country": "Germany",
+      "name": "Chris Skov Nature Hotel",
+      "stars": "4",
+      "address": "Værløse"
+    },
+    {
+      "id": 4,
+      "country": "Pakistan",
+      "name": "Shah King Hotel",
+      "stars": "3.6",
+      "address": "Ishøj"
+    }
+  ],
+
+  "Country": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "Rooms": {
+    "name": "typicode"
+  }
+}
