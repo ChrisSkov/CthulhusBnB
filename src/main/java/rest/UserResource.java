@@ -17,7 +17,7 @@ public class UserResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://127.0.0.1:3307/hotels",
+                "jdbc:mysql://127.0.0.1:3307/hotel",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
