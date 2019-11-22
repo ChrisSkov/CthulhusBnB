@@ -49,6 +49,16 @@ public class APIResource {
         return af.fetch(url, l).toString();
     }
 
+    @GET
+    @Path("ArtinHotel")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getJsonArtinList() {
+        fetchFacade af = new fetchFacade();
+        String url = "https://artinshotel.herokuapp.com/";
+        List<String> l = new ArrayList();
+        l.add("hotel/");
+        return af.fetch(url, l).toString();
+    }
 
 
     @GET
