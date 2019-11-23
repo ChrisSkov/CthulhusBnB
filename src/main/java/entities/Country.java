@@ -6,32 +6,61 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Id;
 
 /**
  *
  * @author Chris
  */
+@Entity
 public class Country implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @OneToMany(cascade = CascadeType.PERSIST, mappedby = "country")
-    private List<Hotel> hotels;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    public List getHotels()
+    public int getId()
     {
-        return hotels;
+        return id;
     }
 
-    public Country(List hotels)
+    public void setId(int id)
     {
-        this.hotels = hotels;
+        this.id = id;
     }
 
- 
+    @Override
+    public int hashCode()
+    {
+        int hash = 0;
+        hash += (int) id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Country))
+        {
+            return false;
+        }
+        Country other = (Country) object;
+        if (this.id != other.id)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "entities.Country[ id=" + id + " ]";
+    }
+
 }
