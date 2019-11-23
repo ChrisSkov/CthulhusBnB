@@ -6,10 +6,12 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -22,6 +24,10 @@ public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Hotel hotel;
+    private int price;
+    private boolean availible;
 
     public int getId()
     {
@@ -62,5 +68,5 @@ public class Room implements Serializable {
     {
         return "entities.Room[ id=" + id + " ]";
     }
-    
+
 }
