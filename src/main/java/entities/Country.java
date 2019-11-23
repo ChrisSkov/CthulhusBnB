@@ -6,10 +6,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,6 +25,8 @@ public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hotel")
+    private List<Hotel> hotels;
 
     public int getId()
     {
