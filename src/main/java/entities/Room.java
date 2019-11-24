@@ -40,6 +40,39 @@ public class Room implements Serializable {
     {
     }
 
+    public Room(int id, Hotel hotel, int price, boolean availible) {
+        this.id = id;
+        this.hotel = hotel;
+        this.price = price;
+        this.availible = availible;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public boolean isAvailible() {
+        return availible;
+    }
+
+    public void setAvailible(boolean availible) {
+        this.availible = availible;
+    }
+    
+    
+
     public void setId(int id)
     {
         this.id = id;

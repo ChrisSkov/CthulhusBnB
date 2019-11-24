@@ -30,6 +30,21 @@ public class Country implements Serializable {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Country")
     private List<Hotel> hotels;
 
+    public Country(int id, List<Hotel> hotels) {
+        this.id = id;
+        this.hotels = hotels;
+    }
+
+    public List<Hotel> getHotels() {
+        return hotels;
+    }
+
+    public void setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
+    }
+
+    
+    
     public int getId()
     {
         return id;
@@ -38,6 +53,7 @@ public class Country implements Serializable {
     public Country()
     {
     }
+    
 
     public void setId(int id)
     {
