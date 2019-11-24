@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author Chris
  */
 @Entity
-@Table(name = "Hotels")
+@Table(name = "Hotel")
 public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class Hotel implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Country country;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hotel")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Hotel")
     private Room room;
 
     public Hotel()

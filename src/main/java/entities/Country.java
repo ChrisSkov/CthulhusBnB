@@ -20,14 +20,14 @@ import javax.persistence.Table;
  * @author Chris
  */
 @Entity
-@Table(name = "Countries")
+@Table(name = "Country")
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "country")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Country")
     private List<Hotel> hotels;
 
     public int getId()
