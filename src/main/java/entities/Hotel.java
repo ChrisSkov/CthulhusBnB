@@ -13,12 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@Table(name = "Hotels")
 public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;
