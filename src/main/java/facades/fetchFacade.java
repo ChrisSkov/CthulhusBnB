@@ -1,10 +1,12 @@
 package facades;
 
+import DTO.Hotels;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
@@ -14,6 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeoutException;
+import rest.APIResource;
 
 
 /**
@@ -21,7 +24,7 @@ import java.util.concurrent.TimeoutException;
  * @author Jacob
  */
 public class fetchFacade {
-
+    
     //This fetch method returns a string with json format
     public String fetch(String urlStr) {
         try {
@@ -98,4 +101,6 @@ public class fetchFacade {
         String result = facade.fetch("https://cthulhusbnb.herokuapp.com/Rooms");
         System.out.println(result);
     }
+
+    
 }

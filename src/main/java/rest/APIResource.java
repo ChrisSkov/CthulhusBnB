@@ -36,18 +36,24 @@ public class APIResource {
     public String getInfoForAll() {
         return "{\"msg\":\"Hello anonymous\"}";
     }
-    
-    @GET
-    @Path("HotelList")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJsonPeopleList() {
-        fetchFacade af = new fetchFacade();
-        String url = "https://cthulhusbnb.herokuapp.com/";
-        List<String> l = new ArrayList();
-        l.add("Hotels/");
-        l.add("Rooms/");
-        return af.fetch(url, l).toString();
-    }
+
+//    @GET
+//    @Path("HotelList")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getJsonPeopleList() {
+//        fetchFacade af = new fetchFacade();
+//        String url = "https://cthulhusbnb.herokuapp.com/";
+//        String url2 = "https://artinshotel.herokuapp.com/";
+//        List<String> l = new ArrayList();
+//        List<String> li = new ArrayList();
+//        l.add("Hotels/");
+//        l.add("Rooms/");
+//        li.add("hotel/");
+//        List<List<String>> res = new ArrayList<List<String>>();
+//        res.add(li);
+//        res.add(l);
+//        return af.fetch(res).toString();
+//    }
 
     @GET
     @Path("ArtinHotel")
@@ -59,7 +65,6 @@ public class APIResource {
         l.add("hotel/");
         return af.fetch(url, l).toString();
     }
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -91,5 +96,5 @@ public class APIResource {
     public String getFromAdmin() {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
-    }   
+    }
 }
