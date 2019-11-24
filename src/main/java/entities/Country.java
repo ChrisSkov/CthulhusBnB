@@ -27,7 +27,7 @@ public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hotel")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "country")
     private List<Hotel> hotels;
 
     public int getId()
