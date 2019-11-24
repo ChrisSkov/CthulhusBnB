@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,9 +32,9 @@ public class Hotel implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Country country;
 
-    @OneToMany(targetEntity=Room.class, cascade = CascadeType.PERSIST, mappedBy = "Hotel")
-    private Room room;
-
+    @OneToMany(targetEntity=Room.class, cascade = CascadeType.PERSIST, mappedBy = "hotel")
+    private List<Room> room;
+    
     public Hotel()
     {
     }

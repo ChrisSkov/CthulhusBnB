@@ -26,7 +26,7 @@ public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(targetEntity=Hotel.class, cascade = CascadeType.PERSIST)
     private Hotel hotel;
     private int price;
     private boolean availible;

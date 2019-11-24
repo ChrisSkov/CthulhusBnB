@@ -3,14 +3,17 @@
   <!-- DO NOT RENAME THE PERSISTENCE UNIT -->
   <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>entities.Hotel</class>
-    <class>entities.Room</class>
     <class>entities.Country</class>
+    <class>entities.Role</class>
+    <class>entities.Room</class>
+    <class>entities.User</class>
+    <class>entities.Hotel</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/hotel"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="ax2"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
