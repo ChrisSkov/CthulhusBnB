@@ -35,6 +35,10 @@ public class Country implements Serializable {
         return id;
     }
 
+    public Country()
+    {
+    }
+
     public void setId(int id)
     {
         this.id = id;

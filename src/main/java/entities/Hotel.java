@@ -27,17 +27,21 @@ public class Hotel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Country country;
-    
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hotel")
     private Room room;
 
+    public Hotel()
+    {
+    }
     public int getId()
     {
         return id;
     }
+
 
     public void setId(int id)
     {

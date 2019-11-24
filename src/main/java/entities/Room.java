@@ -36,6 +36,10 @@ public class Room implements Serializable {
         return id;
     }
 
+    public Room()
+    {
+    }
+
     public void setId(int id)
     {
         this.id = id;
