@@ -29,7 +29,6 @@ public class fetchFacade {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Accept", "application/json;charset=UTF-8");
-            con.setRequestProperty("User-Agent", "server"); //remember if you are using SWAPI
             String jsonStr = "";
             try ( Scanner scan = new Scanner(con.getInputStream())) {
                 while (scan.hasNext()) {
@@ -49,7 +48,6 @@ public class fetchFacade {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Accept", "application/json;charset=UTF-8");
-            con.setRequestProperty("User-Agent", "server"); //remember if you are using SWAPI
             String jsonStr = "";
             try ( Scanner scan = new Scanner(con.getInputStream())) {
                 while (scan.hasNext()) {
