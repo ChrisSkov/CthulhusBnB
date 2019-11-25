@@ -21,15 +21,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
+
 /**
  * @author lam@cphbusiness.dk
  */
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 @Path("info")
 public class APIResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private fetchFacade api = new fetchFacade();
     private static UserFacade FACADE;
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Context
     private UriInfo context;
@@ -123,5 +127,21 @@ public class APIResource {
     public String getFromAdmin() {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
+    }
+    
+    @Path("allHotels")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    
+    public String getAllBooks() throws NotFoundException {
+        List<Hotel> allHotels = new ArrayList<>();
+        List<Hotel> hotels = FACADE.getAllHotel();
+        for (Hotel h : hotels) {
+            allHotels.add(new Hotel(h));
+           
+        }
+
+
+        return GSON.toJson(allHotels);
     }
 }

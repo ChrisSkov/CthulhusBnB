@@ -1,11 +1,13 @@
 package facades;
 
 import entities.Country;
+import entities.Hotel;
 import entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import errorhandling.AuthenticationException;
 import errorhandling.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,6 +60,40 @@ public class UserFacade {
             throw new NotFoundException("No country by that name exists.");
         }
         return country;
+    }
+    
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+    
+    public List<Hotel> getAllHotel() throws NotFoundException {
+        EntityManager em = getEntityManager();
+        List<Hotel> allHotels = new ArrayList<Hotel>();
+        try {
+            allHotels = em.createQuery("select b from Hotel b", Hotel.class).getResultList();
+
+            if (allHotels.size() == 0 || allHotels == null) {
+                throw new NotFoundException("No hotels found");
+            }
+        } finally {
+            em.close();
+        }
+        return allHotels;
+    }
+    
+    public List<Hotel> searchForBook(String search) throws NotFoundException {
+        
+        List<Hotel> all = getAllHotel();
+        List<Hotel> result = new ArrayList<>();
+        for(int i = 0; i < all.size(); i++) {
+            if(all.get(i).toString().contains(search)) {
+                result.add(all.get(i));
+            } 
+            
+        }
+        return result;
+    
+        
     }
 
 }
