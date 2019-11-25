@@ -1,6 +1,10 @@
 package rest;
 
+import entities.Country;
+import entities.Hotel;
 import entities.User;
+import errorhandling.NotFoundException;
+import facades.UserFacade;
 import facades.fetchFacade;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +16,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
@@ -24,6 +29,7 @@ public class APIResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private fetchFacade api = new fetchFacade();
+    private static UserFacade FACADE;
 
     @Context
     private UriInfo context;
@@ -66,6 +72,13 @@ public class APIResource {
     }
 
     @GET
+    @Path("country/{index}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Country getCities(@PathParam(value = "country") String index) throws NotFoundException {
+        return FACADE.getCountry(index);
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
     public String allUsers() {
@@ -78,6 +91,20 @@ public class APIResource {
             em.close();
         }
 
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("allc")
+    public String allcountries() {
+
+        EntityManager em = EMF.createEntityManager();
+        try {
+            List<Country> users = em.createQuery("select country from Country country").getResultList();
+            return "[" + users.size() + "]";
+        } finally {
+            em.close();
+        }
     }
 
     @GET
