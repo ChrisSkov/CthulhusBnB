@@ -54,15 +54,14 @@ public class APIResource {
 //        res.add(l);
 //        return af.fetch(res).toString();
 //    }
-
     @GET
-    @Path("ArtinHotel")
+    @Path("HotelList")
     @Produces(MediaType.APPLICATION_JSON)
     public String getJsonArtinList() {
         fetchFacade af = new fetchFacade();
-        String url = "https://artinshotel.herokuapp.com/";
+        String url = "https://cthulhusbnb.herokuapp.com/";
         List<String> l = new ArrayList();
-        l.add("hotel/");
+        l.add("Hotels/");
         return af.fetch(url, l).toString();
     }
 
@@ -78,6 +77,7 @@ public class APIResource {
         } finally {
             em.close();
         }
+
     }
 
     @GET
