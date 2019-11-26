@@ -96,7 +96,8 @@ public class APIResource {
         {
             List<User> users = em.createQuery("select user from User user").getResultList();
             return "[" + users.size() + "]";
-        } finally
+        }
+        finally
         {
             em.close();
         }
@@ -114,7 +115,8 @@ public class APIResource {
         {
             List<Country> users = em.createQuery("select country from Country country").getResultList();
             return "[" + users.size() + "]";
-        } finally
+        }
+        finally
         {
             em.close();
         }
@@ -140,18 +142,19 @@ public class APIResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-@Path("allHotels")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    
-    public String getAllBooks() throws NotFoundException {
+    @Path("allHotels")
+
+    public String getAllHotels() throws NotFoundException
+    {
         List<Hotel> allHotels = new ArrayList<>();
         List<Hotel> hotels = FACADE.getAllHotel();
-        for (Hotel h : hotels) {
+        for (Hotel h : hotels)
+        {
             allHotels.add(new Hotel(h));
-           
-        }
 
+        }
 
         return GSON.toJson(allHotels);
     }

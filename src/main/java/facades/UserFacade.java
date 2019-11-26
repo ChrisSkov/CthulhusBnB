@@ -9,6 +9,7 @@ import errorhandling.AuthenticationException;
 import errorhandling.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Persistence;
 
 /**
  * @author lam@cphbusiness.dk
@@ -17,7 +18,7 @@ public class UserFacade {
 
     private static EntityManagerFactory emf;
     private static UserFacade instance;
-    private static List<Country> countries;
+    private List<Country> countries;
 
     private UserFacade()
     {
@@ -49,7 +50,8 @@ public class UserFacade {
             {
                 throw new AuthenticationException("Invalid user name or password");
             }
-        } finally
+        }
+        finally
         {
             em.close();
         }
@@ -78,35 +80,59 @@ public class UserFacade {
         return emf.createEntityManager();
     }
 
-public List<Hotel> getAllHotel() throws NotFoundException {
+    public List<Hotel> getAllHotel() throws NotFoundException
+    {
         EntityManager em = getEntityManager();
-        List<Hotel> allHotels = new ArrayList<Hotel>();
-        try {
+        List<Hotel> allHotels = new ArrayList<>();
+        try
+        {
             allHotels = em.createQuery("select b from Hotel b", Hotel.class).getResultList();
 
-            if (allHotels.size() == 0 || allHotels == null) {
+            if (allHotels.size() == 0 || allHotels == null)
+            {
                 throw new NotFoundException("No hotels found");
             }
-        } finally {
+        }
+        finally
+        {
             em.close();
         }
         return allHotels;
     }
-    
-    public List<Hotel> searchForBook(String search) throws NotFoundException {
-        
+
+    public List<Hotel> searchForHotel(String search) throws NotFoundException
+    {
+
         List<Hotel> all = getAllHotel();
         List<Hotel> result = new ArrayList<>();
-        for(int i = 0; i < all.size(); i++) {
-            if(all.get(i).toString().contains(search)) {
+        for (int i = 0; i < all.size(); i++)
+        {
+            if (all.get(i).toString().contains(search))
+            {
                 result.add(all.get(i));
-            } 
-            
+            }
+
         }
         return result;
-    
-        
+
     }
-    
+
+//    public static void main(String[] args) throws NotFoundException
+//    {
+//        UserFacade userFacade = new UserFacade();
+//        
+//        
+//        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("pu");
+//        EntityManager entitymanager = emfactory.createEntityManager();
+//        entitymanager.getTransaction().begin();
+//        
+//        List<Hotel> hotelList = userFacade.getAllHotel();
+//        System.out.println(hotelList);
+//
+//        entitymanager.getTransaction().commit();
+//        entitymanager.close();
+//        emfactory.close();
+//
+//    }
 
 }
