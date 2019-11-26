@@ -5,32 +5,32 @@
  */
 package DTO;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import entities.Hotel;
-
 
 /**
  *
  * @author artin
  */
 public class HotelsDTO {
-    
-    private List<HotelDTO> HotelDTO = new ArrayList<HotelDTO>();
-    public HotelsDTO(List<Hotel> hotel) {
-        
-        for(int i = 0; i < hotel.size(); i++) {
-           this.hotelsDTO.add(new HotelDTO(hotel.get(i)));
-            
+
+    private List<HotelDTO> hotelDTOs = new ArrayList<HotelDTO>();
+
+    public HotelsDTO(List<Hotel> hotel)
+    {
+
+        for (int i = 0; i < hotel.size(); i++)
+        {
+            this.hotelDTOs.add(new HotelDTO(hotel.get(i)));
+
         }
-        
-        
-    }
-   
-    public List<HotelDTO> getHotelsDTO() {
-        return hotelsDTO;
+
     }
 
-    
+    public List<HotelDTO> getHotelsDTO()
+    {
+        return hotelDTOs;
+    }
+
 }
