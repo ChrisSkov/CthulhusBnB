@@ -97,8 +97,13 @@ public class UserFacade {
         return allHotels;
     }
 
-    public List<Hotel> searchHotel(String search) throws NotFoundException
-    {
+
+
+
+
+    
+    public List<Hotel> searchForHotel(String search) throws NotFoundException {
+        
 
         List<Hotel> all = getAllHotel();
         List<Hotel> result = new ArrayList<>();

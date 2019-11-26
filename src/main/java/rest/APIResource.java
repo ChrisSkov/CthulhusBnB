@@ -140,18 +140,19 @@ public class APIResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
+
     @Path("allHotels")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getAllHotels() throws NotFoundException
-    {
+    @Produces({MediaType.APPLICATION_JSON})
+    
+    public String getAllBooks() throws NotFoundException {
         List<Hotel> allHotels = new ArrayList<>();
         List<Hotel> hotels = FACADE.getAllHotel();
-        for (Hotel h : hotels)
-        {
+        for (Hotel h : hotels) {
             allHotels.add(new Hotel(h));
-
+           
         }
+
 
         return GSON.toJson(allHotels);
     }
