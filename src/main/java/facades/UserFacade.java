@@ -19,7 +19,8 @@ public class UserFacade {
     private static UserFacade instance;
     private static List<Country> countries;
 
-    private UserFacade() {
+    private UserFacade()
+    {
     }
 
     /**
@@ -27,73 +28,90 @@ public class UserFacade {
      * @param _emf
      * @return the instance of this facade.
      */
-    public static UserFacade getUserFacade(EntityManagerFactory _emf) {
-        if (instance == null) {
+    public static UserFacade getUserFacade(EntityManagerFactory _emf)
+    {
+        if (instance == null)
+        {
             emf = _emf;
             instance = new UserFacade();
         }
         return instance;
     }
 
-    public User getVeryfiedUser(String username, String password) throws AuthenticationException {
+    public User getVeryfiedUser(String username, String password) throws AuthenticationException
+    {
         EntityManager em = emf.createEntityManager();
         User user;
-        try {
+        try
+        {
             user = em.find(User.class, username);
-            if (user == null || !user.verifyPassword(password)) {
+            if (user == null || !user.verifyPassword(password))
+            {
                 throw new AuthenticationException("Invalid user name or password");
             }
-        } finally {
+        } finally
+        {
             em.close();
         }
         return user;
     }
 
-    public Country getCountry(String name) throws NotFoundException {
+    public Country getCountry(String name) throws NotFoundException
+    {
         Country country = null;
-        for (Country c : this.countries) {
-            if (c.getName().equals(name)) {
+        for (Country c : this.countries)
+        {
+            if (c.getName().equals(name))
+            {
                 country = c;
             }
         }
-        if (country == null) {
+        if (country == null)
+        {
             throw new NotFoundException("No country by that name exists.");
         }
         return country;
     }
-    
-    private EntityManager getEntityManager() {
+
+    private EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
-    
-    public List<Hotel> getAllHotel() throws NotFoundException {
+
+    public List<Hotel> getAllHotel() throws NotFoundException
+    {
         EntityManager em = getEntityManager();
         List<Hotel> allHotels = new ArrayList<Hotel>();
-        try {
+        try
+        {
             allHotels = em.createQuery("select b from Hotel b", Hotel.class).getResultList();
 
-            if (allHotels.size() == 0 || allHotels == null) {
+            if (allHotels.size() == 0 || allHotels == null)
+            {
                 throw new NotFoundException("No hotels found");
             }
-        } finally {
+        } finally
+        {
             em.close();
         }
         return allHotels;
     }
-    
-    public List<Hotel> searchForBook(String search) throws NotFoundException {
-        
+
+    public List<Hotel> searchHotel(String search) throws NotFoundException
+    {
+
         List<Hotel> all = getAllHotel();
         List<Hotel> result = new ArrayList<>();
-        for(int i = 0; i < all.size(); i++) {
-            if(all.get(i).toString().contains(search)) {
+        for (int i = 0; i < all.size(); i++)
+        {
+            if (all.get(i).toString().contains(search))
+            {
                 result.add(all.get(i));
-            } 
-            
+            }
+
         }
         return result;
-    
-        
+
     }
 
 }
