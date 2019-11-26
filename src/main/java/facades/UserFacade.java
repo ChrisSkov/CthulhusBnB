@@ -78,45 +78,35 @@ public class UserFacade {
         return emf.createEntityManager();
     }
 
-    public List<Hotel> getAllHotel() throws NotFoundException
-    {
+public List<Hotel> getAllHotel() throws NotFoundException {
         EntityManager em = getEntityManager();
         List<Hotel> allHotels = new ArrayList<Hotel>();
-        try
-        {
+        try {
             allHotels = em.createQuery("select b from Hotel b", Hotel.class).getResultList();
 
-            if (allHotels.size() == 0 || allHotels == null)
-            {
+            if (allHotels.size() == 0 || allHotels == null) {
                 throw new NotFoundException("No hotels found");
             }
-        } finally
-        {
+        } finally {
             em.close();
         }
         return allHotels;
     }
-
-
-
-
-
     
-    public List<Hotel> searchForHotel(String search) throws NotFoundException {
+    public List<Hotel> searchForBook(String search) throws NotFoundException {
         
-
         List<Hotel> all = getAllHotel();
         List<Hotel> result = new ArrayList<>();
-        for (int i = 0; i < all.size(); i++)
-        {
-            if (all.get(i).toString().contains(search))
-            {
+        for(int i = 0; i < all.size(); i++) {
+            if(all.get(i).toString().contains(search)) {
                 result.add(all.get(i));
-            }
-
+            } 
+            
         }
         return result;
-
+    
+        
     }
+    
 
 }

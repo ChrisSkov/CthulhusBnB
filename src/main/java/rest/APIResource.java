@@ -140,8 +140,7 @@ public class APIResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-
-    @Path("allHotels")
+@Path("allHotels")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     

@@ -53,6 +53,11 @@ public class Hotel implements Serializable {
         return id;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+    
+
 
     public void setId(int id)
     {
@@ -132,6 +137,7 @@ public class Hotel implements Serializable {
         return true;
     }
 
+ 
     
 
 }
