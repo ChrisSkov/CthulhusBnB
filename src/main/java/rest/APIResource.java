@@ -142,11 +142,7 @@ public class APIResource {
 
     @Path("allHotels")
     @GET
-    @Produces(
-    {
-        MediaType.APPLICATION_JSON
-    })
-
+    @Produces(MediaType.APPLICATION_JSON)
     public String getAllHotels() throws NotFoundException
     {
         List<Hotel> allHotels = new ArrayList<>();
