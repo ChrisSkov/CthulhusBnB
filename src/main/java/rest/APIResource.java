@@ -149,11 +149,11 @@ public class APIResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String makeSearch(@PathParam("search") String search) throws NotFoundException {
-        List<HotelDTO> result = new ArrayList<>();
+        List<Hotel> result = new ArrayList<>();
         List<Hotel> hotels = FACADE.searchForHotel(search);
 
         for (Hotel h : hotels) {
-            result.add(new HotelDTO(h));
+            result.add(h);
         }
 
         return GSON.toJson(result);
