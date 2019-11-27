@@ -16,14 +16,14 @@ public class HotelDTO {
     
     private String name;
     private String stars;
-    private Country country; 
+    
    // private Hotel hotel;
 
     public HotelDTO(Hotel hotel)
     {
         this.name = hotel.getName();
         this.stars = hotel.getStars();
-        this.country = hotel.getCountry(); 
+        
         //this.hotel = hotel.getHotel();
 
     }
