@@ -144,7 +144,7 @@ public class APIResource {
 
         return GSON.toJson(allHotels);
     }
-    
+
     @Path("allHotels/{search}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})

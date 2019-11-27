@@ -116,6 +116,45 @@ public class UserFacade {
         return result;
 
     }
+    
+        public List<Country> getAllCountry() throws NotFoundException
+    {
+        EntityManager em = getEntityManager();
+        List<Country> allCountries = new ArrayList<>();
+        try
+        {
+            allCountries = em.createQuery("select c from Country c", Country.class).getResultList();
+
+            if (allCountries.size() == 0 || allCountries == null)
+            {
+                throw new NotFoundException("No country found");
+            }
+        }
+        finally
+        {
+            em.close();
+        }
+        return allCountries;
+    }
+
+    
+        public List<Country> searchForCountry(String search) throws NotFoundException
+    {
+
+        List<Country> all = getAllCountry();
+        List<Country> result = new ArrayList<>();
+        for (int i = 0; i < all.size(); i++)
+        {
+            if (all.get(i).toString().contains(search))
+            {
+                result.add(all.get(i));
+            }
+
+        }
+        return result;
+
+    }
+
 
 //    public static void main(String[] args) throws NotFoundException
 //    {
