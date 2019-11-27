@@ -15,13 +15,13 @@ public class HotelDTO {
     
     private String name;
     private String stars;
-    private Hotel hotel;
+   // private Hotel hotel;
 
     public HotelDTO(Hotel hotel)
     {
         this.name = hotel.getName();
         this.stars = hotel.getStars();
-        this.hotel = hotel.getHotel();
+        //this.hotel = hotel.getHotel();
 
     }
 

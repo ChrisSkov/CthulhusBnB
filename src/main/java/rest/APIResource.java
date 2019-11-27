@@ -1,5 +1,6 @@
 package rest;
 
+import DTO.HotelDTO;
 import entities.Country;
 import entities.Hotel;
 import entities.User;
@@ -32,9 +33,9 @@ public class APIResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private fetchFacade api = new fetchFacade();
-    private static UserFacade FACADE;
+    private static UserFacade FACADE = UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
+    
     @Context
     private UriInfo context;
 
@@ -43,8 +44,7 @@ public class APIResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoForAll()
-    {
+    public String getInfoForAll() {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
@@ -68,8 +68,7 @@ public class APIResource {
     @GET
     @Path("HotelList")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJsonArtinList()
-    {
+    public String getJsonArtinList() {
         fetchFacade af = new fetchFacade();
         String url = "https://cthulhusbnb.herokuapp.com/";
         List<String> l = new ArrayList();
@@ -80,25 +79,20 @@ public class APIResource {
     @GET
     @Path("country/{index}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Country getCities(@PathParam(value = "country") String index) throws NotFoundException
-    {
+    public Country getCities(@PathParam(value = "index") String index) throws NotFoundException {
         return FACADE.getCountry(index);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String allUsers()
-    {
+    public String allUsers() {
 
         EntityManager em = EMF.createEntityManager();
-        try
-        {
+        try {
             List<User> users = em.createQuery("select user from User user").getResultList();
             return "[" + users.size() + "]";
-        }
-        finally
-        {
+        } finally {
             em.close();
         }
 
@@ -107,17 +101,13 @@ public class APIResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allc")
-    public String allcountries()
-    {
+    public String allcountries() {
 
         EntityManager em = EMF.createEntityManager();
-        try
-        {
+        try {
             List<Country> users = em.createQuery("select country from Country country").getResultList();
             return "[" + users.size() + "]";
-        }
-        finally
-        {
+        } finally {
             em.close();
         }
     }
@@ -126,8 +116,7 @@ public class APIResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("user")
     @RolesAllowed("user")
-    public String getFromUser()
-    {
+    public String getFromUser() {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
     }
@@ -136,8 +125,7 @@ public class APIResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("admin")
     @RolesAllowed("admin")
-    public String getFromAdmin()
-    {
+    public String getFromAdmin() {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
@@ -146,13 +134,11 @@ public class APIResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("allHotels")
 
-    public String getAllHotels() throws NotFoundException
-    {
-        List<Hotel> allHotels = new ArrayList<>();
+    public String getAllHotels() throws NotFoundException {
+        List<HotelDTO> allHotels = new ArrayList<>();
         List<Hotel> hotels = FACADE.getAllHotel();
-        for (Hotel h : hotels)
-        {
-            allHotels.add(new Hotel(h));
+        for (Hotel h : hotels) {
+            allHotels.add(new HotelDTO(h));
 
         }
 

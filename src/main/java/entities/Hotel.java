@@ -31,19 +31,22 @@ public class Hotel implements Serializable {
     private int id;
     private String name;
     private String stars;
-    private Hotel hotel; 
+    
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Country country;
 
     @OneToMany(targetEntity=Room.class, cascade = CascadeType.PERSIST, mappedBy = "hotel")
     private List<Room> room;
-    
-    
-    public Hotel(Hotel hotel)
-    {
-        this.hotel = hotel; 
+
+    public Hotel(String name, String stars, Country country, List<Room> room) {
+        this.name = name;
+        this.stars = stars;
+        this.country = country;
+        this.room = room;
     }
+    
+    
     
     public Hotel()
     {
@@ -51,10 +54,6 @@ public class Hotel implements Serializable {
     public int getId()
     {
         return id;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
     }
     
 
