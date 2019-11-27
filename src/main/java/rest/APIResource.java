@@ -35,7 +35,7 @@ public class APIResource {
     private fetchFacade api = new fetchFacade();
     private static UserFacade FACADE = UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
+
     @Context
     private UriInfo context;
 
@@ -101,7 +101,7 @@ public class APIResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allc")
-    public String allcountries() {
+    public String allCountries() {
 
         EntityManager em = EMF.createEntityManager();
         try {
@@ -144,4 +144,19 @@ public class APIResource {
 
         return GSON.toJson(allHotels);
     }
+    
+    @Path("allHotels/{search}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String makeSearch(@PathParam("search") String search) throws NotFoundException {
+        List<HotelDTO> result = new ArrayList<>();
+        List<Hotel> hotels = FACADE.searchForHotel(search);
+
+        for (Hotel h : hotels) {
+            result.add(new HotelDTO(h));
+        }
+
+        return GSON.toJson(result);
+    }
+
 }
