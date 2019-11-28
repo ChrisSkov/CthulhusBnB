@@ -48,7 +48,7 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "Hotel{" + "id=" + id + ", name=" + name + ", stars=" + stars + ", country=" + country.getName() + '}';
+        return "Hotel{" + ", name=" + name + ", stars=" + stars + ", country=" + country.getName() + '}';
     }
     
     public Hotel()
