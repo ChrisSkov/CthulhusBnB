@@ -17,7 +17,6 @@ public class HotelDTO {
     private String name;
     private String stars;
     private String country;
-    
    // private Hotel hotel;
 
     public HotelDTO(Hotel hotel)
@@ -25,7 +24,6 @@ public class HotelDTO {
         this.name = hotel.getName();
         this.stars = hotel.getStars();
         this.country = hotel.getCountry().getName();
-        
         //this.hotel = hotel.getHotel();
 
     }
