@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entities.Role;
 import entities.User;
 import utils.EMF_Creator;
 import facades.FacadeExample;
@@ -68,8 +69,10 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String creatUser(String user)
-    {
+    {   
+        Role role = new Role("User");
         User newUser = (GSON.fromJson(user,User.class));
+        newUser.addRole(role);
         return GSON.toJson(newUser);
     }
 }
