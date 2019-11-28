@@ -110,18 +110,4 @@ public class fetchFacade {
             executor.shutdown();
         }
     }
-<<<<<<< HEAD
-    
-=======
-
-    public static void main(String[] args) throws ProtocolException, IOException, InterruptedException, ExecutionException, TimeoutException
-    {
-        //Changes
-        fetchFacade facade = new fetchFacade();
-        //
-        String result = facade.fetch("https://cthulhusbnb.herokuapp.com/Rooms");
-        System.out.println(result);
-    }
->>>>>>> 4b92bac7137a6bcb4171b3599cff27a2134ab19e
-
 }
