@@ -135,10 +135,10 @@ public class APIResource {
     @Path("allHotels")
 
     public String getAllHotels() throws NotFoundException {
-        List<HotelDTO> allHotels = new ArrayList<>();
+        List<Hotel> allHotels = new ArrayList<>();
         List<Hotel> hotels = FACADE.getAllHotel();
         for (Hotel h : hotels) {
-            allHotels.add(new HotelDTO(h));
+            allHotels.add(h);
 
         }
 
