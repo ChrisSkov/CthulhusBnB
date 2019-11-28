@@ -44,7 +44,8 @@ public class APIResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoForAll() {
+    public String getInfoForAll()
+    {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
@@ -68,7 +69,8 @@ public class APIResource {
     @GET
     @Path("HotelList")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJsonArtinList() {
+    public String getJsonArtinList()
+    {
         fetchFacade af = new fetchFacade();
         String url = "https://cthulhusbnb.herokuapp.com/";
         List<String> l = new ArrayList();
@@ -79,20 +81,25 @@ public class APIResource {
     @GET
     @Path("country/{index}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Country getCities(@PathParam(value = "index") String index) throws NotFoundException {
+    public Country getCities(@PathParam(value = "index") String index) throws NotFoundException
+    {
         return FACADE.getCountry(index);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String allUsers() {
+    public String allUsers()
+    {
 
         EntityManager em = EMF.createEntityManager();
-        try {
-            List<User> users = em.createQuery("select user from User user").getResultList();
+        try
+        {
+            List<User> users = em.createQuery("select u from User u").getResultList();
             return "[" + users.size() + "]";
-        } finally {
+        }
+        finally
+        {
             em.close();
         }
 
@@ -101,13 +108,17 @@ public class APIResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allc")
-    public String allCountries() {
+    public String allCountries()
+    {
 
         EntityManager em = EMF.createEntityManager();
-        try {
-            List<Country> users = em.createQuery("select country from Country country").getResultList();
-            return "[" + users.size() + "]";
-        } finally {
+        try
+        {
+            List<Country> countries = em.createQuery("select c from Country c").getResultList();
+            return "[" + countries.size() + "]";
+        }
+        finally
+        {
             em.close();
         }
     }
@@ -116,28 +127,35 @@ public class APIResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("user")
     @RolesAllowed("user")
-    public String getFromUser() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
+    public String getFromUser()
+    {
+        String thisUser = securityContext.getUserPrincipal().getName();
+        return "{\"msg\": \"Hello to User: " + thisUser + "\"}";
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("admin")
     @RolesAllowed("admin")
-    public String getFromAdmin() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
+    public String getFromAdmin()
+    {
+        String thisUser = securityContext.getUserPrincipal().getName();
+        return "{\"msg\": \"Hello to (admin) User: " + thisUser + "\"}";
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(
+    {
+        MediaType.APPLICATION_JSON
+    })
     @Path("allHotels")
 
-    public String getAllHotels() throws NotFoundException {
+    public String getAllHotels() throws NotFoundException
+    {
         List<HotelDTO> allHotels = new ArrayList<>();
         List<Hotel> hotels = FACADE.getAllHotel();
-        for (Hotel h : hotels) {
+        for (Hotel h : hotels)
+        {
             allHotels.add(new HotelDTO(h));
 
         }
@@ -147,12 +165,17 @@ public class APIResource {
 
     @Path("allHotels/{search}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String makeSearch(@PathParam("search") String search) throws NotFoundException {
+    @Produces(
+    {
+        MediaType.APPLICATION_JSON
+    })
+    public String makeSearch(@PathParam("search") String search) throws NotFoundException
+    {
         List<HotelDTO> result = new ArrayList<>();
         List<Hotel> hotels = FACADE.searchForHotel(search);
 
-        for (Hotel h : hotels) {
+        for (Hotel h : hotels)
+        {
             result.add(new HotelDTO(h));
         }
 

@@ -116,8 +116,8 @@ public class UserFacade {
         return result;
 
     }
-    
-        public List<Country> getAllCountry() throws NotFoundException
+
+    public List<Country> getAllCountry() throws NotFoundException
     {
         EntityManager em = getEntityManager();
         List<Country> allCountries = new ArrayList<>();
@@ -137,8 +137,7 @@ public class UserFacade {
         return allCountries;
     }
 
-    
-        public List<Country> searchForCountry(String search) throws NotFoundException
+    public List<Country> searchForCountry(String search) throws NotFoundException
     {
 
         List<Country> all = getAllCountry();
@@ -154,24 +153,5 @@ public class UserFacade {
         return result;
 
     }
-
-
-//    public static void main(String[] args) throws NotFoundException
-//    {
-//        UserFacade userFacade = new UserFacade();
-//        
-//        
-//        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("pu");
-//        EntityManager entitymanager = emfactory.createEntityManager();
-//        entitymanager.getTransaction().begin();
-//        
-//        List<Hotel> hotelList = userFacade.getAllHotel();
-//        System.out.println(hotelList);
-//
-//        entitymanager.getTransaction().commit();
-//        entitymanager.close();
-//        emfactory.close();
-//
-//    }
 
 }
