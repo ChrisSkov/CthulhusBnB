@@ -30,25 +30,46 @@ public class UserResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String demo() {
+    @Produces(
+            {
+                MediaType.APPLICATION_JSON
+            })
+    public String demo()
+    {
         return "{\"msg\":\"Hello World\"}";
     }
 
     @Path("spells")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(
+            {
+                MediaType.APPLICATION_JSON
+            })
     @RolesAllowed("user")
-    public String findSpells() {
+    public String findSpells()
+    {
         return "spells";
     }
 
     @Path("delete")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(
+            {
+                MediaType.APPLICATION_JSON
+            })
     @RolesAllowed("admin")
-    public String removeUser() {
+    public String removeUser()
+    {
         return "remove";
     }
 
+    @Path("add/User")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String creatUser(String user)
+    {
+        User newUser = (GSON.fromJson(user,User.class));
+        return GSON.toJson(newUser);
+    }
 }

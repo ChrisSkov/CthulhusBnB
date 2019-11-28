@@ -20,7 +20,8 @@ public class UserFacade {
     private static UserFacade instance;
     private List<Country> countries;
 
-    public UserFacade() {
+    public UserFacade()
+    {
     }
 
     /**
@@ -28,66 +29,86 @@ public class UserFacade {
      * @param _emf
      * @return the instance of this facade.
      */
-    public static UserFacade getUserFacade(EntityManagerFactory _emf) {
-        if (instance == null) {
+    public static UserFacade getUserFacade(EntityManagerFactory _emf)
+    {
+        if (instance == null)
+        {
             emf = _emf;
             instance = new UserFacade();
         }
         return instance;
     }
 
-    public User getVeryfiedUser(String username, String password) throws AuthenticationException {
+    public User getVeryfiedUser(String username, String password) throws AuthenticationException
+    {
         EntityManager em = emf.createEntityManager();
         User user;
-        try {
+        try
+        {
             user = em.find(User.class, username);
-            if (user == null || !user.verifyPassword(password)) {
+            if (user == null || !user.verifyPassword(password))
+            {
                 throw new AuthenticationException("Invalid user name or password");
             }
-        } finally {
+        }
+        finally
+        {
             em.close();
         }
         return user;
     }
 
-    public Country getCountry(String name) throws NotFoundException {
+    public Country getCountry(String name) throws NotFoundException
+    {
         Country country = null;
-        for (Country c : this.countries) {
-            if (c.getName().equals(name)) {
+        for (Country c : this.countries)
+        {
+            if (c.getName().equals(name))
+            {
                 country = c;
             }
         }
-        if (country == null) {
+        if (country == null)
+        {
             throw new NotFoundException("No country by that name exists.");
         }
         return country;
     }
 
-    private EntityManager getEntityManager() {
+    private EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
-    public List<Hotel> getAllHotel() throws NotFoundException {
+    public List<Hotel> getAllHotel() throws NotFoundException
+    {
         EntityManager em = getEntityManager();
         List<Hotel> allHotels = new ArrayList<>();
-        try {
+        try
+        {
             allHotels = em.createQuery("select b from Hotel b", Hotel.class).getResultList();
 
-            if (allHotels.size() == 0 || allHotels == null) {
+            if (allHotels.size() == 0 || allHotels == null)
+            {
                 throw new NotFoundException("No hotels found");
             }
-        } finally {
+        }
+        finally
+        {
             em.close();
         }
         return allHotels;
     }
 
-    public List<Hotel> searchForHotel(String search) throws NotFoundException {
+    public List<Hotel> searchForHotel(String search) throws NotFoundException
+    {
 
         List<Hotel> all = getAllHotel();
         List<Hotel> result = new ArrayList<>();
-        for (int i = 0; i < all.size(); i++) {
-            if (all.get(i).toString().toLowerCase().contains(search.toLowerCase())) {
+        for (int i = 0; i < all.size(); i++)
+        {
+            if (all.get(i).toString().toLowerCase().contains(search.toLowerCase()))
+            {
                 result.add(all.get(i));
             }
 
@@ -96,27 +117,35 @@ public class UserFacade {
 
     }
 
-    public List<Country> getAllCountry() throws NotFoundException {
+    public List<Country> getAllCountry() throws NotFoundException
+    {
         EntityManager em = getEntityManager();
         List<Country> allCountries = new ArrayList<>();
-        try {
+        try
+        {
             allCountries = em.createQuery("select c from Country c", Country.class).getResultList();
 
-            if (allCountries.size() == 0 || allCountries == null) {
+            if (allCountries.size() == 0 || allCountries == null)
+            {
                 throw new NotFoundException("No country found");
             }
-        } finally {
+        }
+        finally
+        {
             em.close();
         }
         return allCountries;
     }
 
-    public List<Country> searchForCountry(String search) throws NotFoundException {
+    public List<Country> searchForCountry(String search) throws NotFoundException
+    {
 
         List<Country> all = getAllCountry();
         List<Country> result = new ArrayList<>();
-        for (int i = 0; i < all.size(); i++) {
-            if (all.get(i).toString().contains(search)) {
+        for (int i = 0; i < all.size(); i++)
+        {
+            if (all.get(i).toString().contains(search))
+            {
                 result.add(all.get(i));
             }
 
@@ -124,21 +153,33 @@ public class UserFacade {
         return result;
 
     }
-    
-        public User createUser(String userName, String userPass) {
-        if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty()) {
+
+    public User createUser(String userName, String userPass)
+    {
+        if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
+        {
             User u = new User(userName, userPass);
             EntityManager em = getEntityManager();
-            try {
+            try
+            {
                 em.getTransaction().begin();
                 em.persist(u);
                 em.getTransaction().commit();
                 return u;
-            } finally {
+            }
+            finally
+            {
                 em.close();
             }
         }
         return null;
     }
+
+//    public static void main(String[] args)
+//    {
+//        //UserFacade uf = instance;
+//        User user = instance.createUser(user.getUserName(), user.getUserPass());
+//        System.out.println(user.getUserName());
+//    }
 
 }
