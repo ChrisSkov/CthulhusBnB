@@ -135,10 +135,10 @@ public class APIResource {
     @Path("allHotels")
 
     public String getAllHotels() throws NotFoundException {
-        List<Hotel> allHotels = new ArrayList<>();
+        List<HotelDTO> allHotels = new ArrayList<>();
         List<Hotel> hotels = FACADE.getAllHotel();
         for (Hotel h : hotels) {
-            allHotels.add(h);
+            allHotels.add(new HotelDTO(h));
 
         }
 
@@ -149,11 +149,11 @@ public class APIResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String makeSearch(@PathParam("search") String search) throws NotFoundException {
-        List<Hotel> result = new ArrayList<>();
+        List<HotelDTO> result = new ArrayList<>();
         List<Hotel> hotels = FACADE.searchForHotel(search);
 
         for (Hotel h : hotels) {
-            result.add(h);
+            result.add(new HotelDTO(h));
         }
 
         return GSON.toJson(result);
