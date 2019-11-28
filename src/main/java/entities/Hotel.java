@@ -45,8 +45,11 @@ public class Hotel implements Serializable {
         this.country = country;
         this.room = room;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Hotel{" + "id=" + id + ", name=" + name + ", stars=" + stars + ", country=" + country + ", room=" + room + '}';
+    }
     
     public Hotel()
     {
