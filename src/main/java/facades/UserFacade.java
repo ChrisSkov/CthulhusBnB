@@ -20,7 +20,7 @@ public class UserFacade {
     private static UserFacade instance;
     private List<Country> countries;
 
-    private UserFacade()
+    public UserFacade()
     {
     }
 
@@ -116,8 +116,8 @@ public class UserFacade {
         return result;
 
     }
-    
-        public List<Country> getAllCountry() throws NotFoundException
+
+    public List<Country> getAllCountry() throws NotFoundException
     {
         EntityManager em = getEntityManager();
         List<Country> allCountries = new ArrayList<>();
@@ -137,8 +137,7 @@ public class UserFacade {
         return allCountries;
     }
 
-    
-        public List<Country> searchForCountry(String search) throws NotFoundException
+    public List<Country> searchForCountry(String search) throws NotFoundException
     {
 
         List<Country> all = getAllCountry();
@@ -155,23 +154,32 @@ public class UserFacade {
 
     }
 
+    public User createUser(String userName, String userPass)
+    {
+        if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
+        {
+            User u = new User(userName, userPass);
+            EntityManager em = getEntityManager();
+            try
+            {
+                em.getTransaction().begin();
+                em.persist(u);
+                em.getTransaction().commit();
+                return u;
+            }
+            finally
+            {
+                em.close();
+            }
+        }
+        return null;
+    }
 
-//    public static void main(String[] args) throws NotFoundException
+//    public static void main(String[] args)
 //    {
-//        UserFacade userFacade = new UserFacade();
-//        
-//        
-//        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("pu");
-//        EntityManager entitymanager = emfactory.createEntityManager();
-//        entitymanager.getTransaction().begin();
-//        
-//        List<Hotel> hotelList = userFacade.getAllHotel();
-//        System.out.println(hotelList);
-//
-//        entitymanager.getTransaction().commit();
-//        entitymanager.close();
-//        emfactory.close();
-//
+//        //UserFacade uf = instance;
+//        User user = instance.createUser(user.getUserName(), user.getUserPass());
+//        System.out.println(user.getUserName());
 //    }
 
 }
