@@ -31,9 +31,7 @@ public class Booking implements Serializable {
     @JoinColumn(name = "User")
     private User user;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date date;
-
+   
     public Integer getId() {
         return id;
     }
@@ -42,9 +40,7 @@ public class Booking implements Serializable {
         this.id = id;
     }
     
-    public Booking() {
-        this.date = new Date();
-    }
+   
 
     public User getUser() {
         return user;
